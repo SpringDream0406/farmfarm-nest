@@ -6,17 +6,17 @@ import { setupSwagger } from "./commons/swagger/setupSwagger";
 import * as fs from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const httpsOptions = {
+    key: fs.readFileSync('/app/ssl/key.key'),
+    cert: fs.readFileSync('/app/ssl/cert.crt'),
+  };
+  
+  const app = await NestFactory.create(AppModule, { httpsOptions });
   app.useGlobalPipes(new ValidationPipe());
   // app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors();
 
   setupSwagger(app);
-
-  const httpsOptions = {
-    key: fs.readFileSync('/app/ssl/key.key'),
-    cert: fs.readFileSync('/app/ssl/cert.crt'),
-  };
 
   await app.listen(3333);
 }
