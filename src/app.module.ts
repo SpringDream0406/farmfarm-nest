@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { FarmsModule } from './apis/03.Farms/farms.module';
-import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './apis/01.Auth/auth.module';
-import { ContentsModule } from './apis/05.Contents/contents.module';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { FarmsModule } from "./apis/03.Farms/farms.module";
+import { ConfigModule } from "@nestjs/config";
+import { AuthModule } from "./apis/01.Auth/auth.module";
+import { ContentsModule } from "./apis/05.Contents/contents.module";
+import { AppController } from "./app.controller";
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { ContentsModule } from './apis/05.Contents/contents.module';
     FarmsModule,
     ContentsModule,
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as 'mysql',
+      type: process.env.DB_TYPE as "mysql",
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
@@ -25,5 +26,6 @@ import { ContentsModule } from './apis/05.Contents/contents.module';
       logging: false, // 쿼리 실행 내역 터미널에 띄움
     }),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
