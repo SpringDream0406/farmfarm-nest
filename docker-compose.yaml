@@ -1,0 +1,19 @@
+services:
+  farmfarm-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:3333
+    env_file:
+      - ./.env
+    depends_on:
+      - farmfarm-db
+
+  farmfarm-db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: "farmfarm"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - 3306:3306
