@@ -1,19 +1,22 @@
 services:
   farmfarm-server:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: springdream0406/farmfarm-nest:latest
     ports:
-      - 3333:3333
-    env_file:
-      - ./.env
+      - 3000:3333
+    environment:
+      DB_TYPE: mysql
+      DB_HOST: farmfarm-db
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: farmfarm2024!
+      DB_DATABASE: farmfarm
     depends_on:
       - farmfarm-db
 
   farmfarm-db:
     image: mysql:latest
     environment:
-      MYSQL_DATABASE: "farmfarm"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: farmfarm
+      MYSQL_ROOT_PASSWORD: farmfarm2024!
     ports:
-      - 3306:3306
+      - 3001:3306
