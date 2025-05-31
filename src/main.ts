@@ -1,7 +1,7 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from './commons/swagger/setupSwagger';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ValidationPipe } from "@nestjs/common";
+import { setupSwagger } from "./commons/swagger/setupSwagger";
 // import { HttpExceptionFilter } from './commons/filter/http-exception.filter';
 
 async function bootstrap() {
@@ -12,6 +12,6 @@ async function bootstrap() {
 
   setupSwagger(app);
 
-  await app.listen(3333);
+  await app.listen(3000);
 }
 bootstrap();
