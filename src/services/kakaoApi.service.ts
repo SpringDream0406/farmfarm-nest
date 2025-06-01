@@ -1,7 +1,5 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import axios from 'axios';
-
-const key = process.env.KAKAO_REST_API_KEY
+import { BadRequestException, Injectable } from "@nestjs/common";
+import axios from "axios";
 
 @Injectable()
 export class KakaoApiService {
@@ -13,13 +11,14 @@ export class KakaoApiService {
           query: address,
         },
         headers: {
-          Authorization: `KakaoAK ${key}`,
+          Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
         },
-      },
+      }
     );
 
     const documents = response.data.documents;
-    if (documents.length <= 0) throw new BadRequestException('주소가 잘못되었습니다.');
+    if (documents.length <= 0)
+      throw new BadRequestException("주소가 잘못되었습니다.");
     const { y: lat, x: lng } = documents[0];
     return { lat, lng };
   }
